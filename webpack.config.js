@@ -1,5 +1,5 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { HotModuleReplacementPlugin } from 'webpack';
+import { HotModuleReplacementPlugin, NamedModulesPlugin } from 'webpack';
 import glob from 'glob';
 import path from 'path';
 
@@ -93,7 +93,9 @@ const config = {
     // configure plugins
     plugins: [
         // enable hot-reloading
-        new HotModuleReplacementPlugin()
+        new HotModuleReplacementPlugin(),
+
+        new NamedModulesPlugin(),
     ],
 
     // generate source-maps
