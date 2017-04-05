@@ -2,4 +2,40 @@
 
 BODY {
     background-color: #EEE;
+    font-size: 100%;
+}
+
+.highlight {
+    background-color: rgba(0, 255, 0, 0.25);
+}
+
+.content-section {
+    padding: 20px;
+}
+
+.box {
+    background: url("http://lorempixel.com/400/200/nature/1");
+    box-sizing: border-box;
+    width: 400px;
+    height: 200px;
+    border: 20px solid rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    font-size: 130%;
+
+    &--content {
+        background-clip: content-box;
+    }
+
+    &--padding {
+        background-clip: padding-box;
+    }
+
+    &--border {
+        background-clip: border-box;
+    }
 }
