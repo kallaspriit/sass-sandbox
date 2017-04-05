@@ -17,7 +17,11 @@ const devServer = new WebpackDevServer(compiler, {
 		ignored: /node_modules/,
 	},
 	host: '0.0.0.0',*/
-    hot: true
+    hot: true,
+	overlay: {
+		warnings: true,
+		errors: true,
+	},
 });
 
 devServer.listen(3000);

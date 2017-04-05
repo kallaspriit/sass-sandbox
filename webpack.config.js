@@ -1,7 +1,16 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { HotModuleReplacementPlugin } from 'webpack';
+import glob from 'glob';
+import path from 'path';
 
-export default {
+const resolvePath = relativePath => path.resolve(__dirname, relativePath);
+const includePaths = [
+    resolvePath('.', 'gfx')
+];
+
+console.log('includePaths', includePaths);
+
+const config = {
 
     // base directory
     context: __dirname,
@@ -27,18 +36,17 @@ export default {
 
             // add support for loading html files
             {
+                include: includePaths,
                 test: /\.html$/,
                 use: [{
                     loader: 'html-loader',
-                    options: {
-                        minimize: true
-                    }
                 }],
             },
 
             // add support loading media files
             {
     			test: /\.(gif|png|jpe?g|svg)$/,
+                include: includePaths,
     			loaders: [
     				{
     					loader: 'file-loader',
@@ -70,6 +78,7 @@ export default {
             // add support for loading sass files
             {
                 test: /\.scss$/,
+                include: includePaths,
                 use: [{
                     loader: 'style-loader' // creates style nodes from JS strings
                 }, {
@@ -83,15 +92,20 @@ export default {
 
     // configure plugins
     plugins: [
-        // generate the HTML file from our template
-        new HtmlWebpackPlugin({
-            template: 'index.html'
-        }),
-
         // enable hot-reloading
         new HotModuleReplacementPlugin()
     ],
 
     // generate source-maps
-    devtool: 'source-map',
+    // devtool: 'source-map',
 };
+
+// addd a html webpack plugin for each of the html files
+glob.sync('*.html').forEach((filename) => {
+    config.plugins.push(new HtmlWebpackPlugin({
+        filename,
+        template: filename
+    }));
+});
+
+export default config;
