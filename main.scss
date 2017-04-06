@@ -22,6 +22,32 @@ html {
     box-sizing: inherit;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+// clearfix - https://css-tricks.com/snippets/css/clear-fix/
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+// block identifier helper
+.id {
+    background: #2db34a;
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: hidden;
+    min-height: 4rem;
+    font-size: 130%;
+    font-family: monospace;
+}
+
 @mixin grid($size, $color, $width) {
     background-size: $size $size;
     background-image: linear-gradient(to right, $color $width, transparent $width), linear-gradient(to bottom, $color $width, transparent $width);
@@ -50,6 +76,7 @@ html {
 }
 
 .experiment {
+    position: relative;
     margin-bottom: 4rem;
     background-color: rgba(0, 0, 0, 0.2);
 
@@ -61,6 +88,9 @@ html {
         line-height: 4rem;
         background-color: #333;
         color: #FFF;
+        font-family: 'Lato', sans-serif;
+        font-weight: 100;
+        font-size: 2em;
     }
 
     &__contents {
@@ -102,43 +132,31 @@ html {
         $horizontal-margin: 2%;
         $content-width: 65%;
 
-        .container {
+        .layout {
             width: 60%;
             padding: 1em;
             margin: 0 auto;
-        }
 
-        .id {
-            background: #2db34a;
-            border-radius: 10px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            overflow: hidden;
-            min-height: 4rem;
-        }
+            &__header,
+            &__content,
+            &__sidebar {
+                margin-bottom: $vertical-margin;
+            }
 
-        .header,
-        .content,
-        .sidebar {
-            margin-bottom: $vertical-margin;
-        }
+            &__content {
+                float: left;
+                width: $content-width;
+            }
 
-        .content {
-            float: left;
-            width: $content-width;
-        }
+            &__sidebar {
+                float: left;
+                width: 100% - $content-width - $horizontal-margin;
+                margin-left: $horizontal-margin;
+            }
 
-        .sidebar {
-            float: right;
-            width: 100% - $content-width - $horizontal-margin;
-            margin-left: $horizontal-margin;
-        }
-
-        .footer {
-            clear: both;
+            &__footer {
+                clear: both;
+            }
         }
     }
 
