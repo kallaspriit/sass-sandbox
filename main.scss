@@ -1,41 +1,142 @@
 @import "~normalize-scss/sass/normalize/import-now";
 
-BODY {
-    background-color: #EEE;
-    font-size: 100%;
+/*
+// https://github.com/modularscale/modularscale-sass
+@import '~modularscale-sass/stylesheets/modularscale';
+
+$modularscale: (
+  base: 1em,
+  ratio: 1.5
+);
+*/
+
+@mixin grid($size, $color, $width) {
+    background-size: $size $size;
+    background-image: linear-gradient(to right, $color $width, transparent $width), linear-gradient(to bottom, $color $width, transparent $width);
 }
 
-.highlight {
-    background-color: rgba(0, 255, 0, 0.25);
-}
-
-.content-section {
-    padding: 20px;
-}
-
-.box {
-    background: url("http://lorempixel.com/400/200/nature/1");
+// https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+html {
     box-sizing: border-box;
-    width: 400px;
-    height: 200px;
-    border: 20px solid rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    margin: 0 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFF;
-    font-size: 130%;
+    font-size: 1/1.5em;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
 
-    &--content {
-        background-clip: content-box;
+.grid {
+    position: relative;
+
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
     }
 
-    &--padding {
-        background-clip: padding-box;
+    &:before {
+        @include grid(5rem, rgba(0, 0, 0, 0.25), 2px);
     }
 
-    &--border {
-        background-clip: border-box;
+    &:after {
+        @include grid(1rem, rgba(0, 0, 0, 0.25), 1px);
     }
+}
+
+.experiment {
+    margin-bottom: 4rem;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    @extend .grid;
+
+    &__title {
+        margin: 0;
+        padding: 0 1em;
+        line-height: 4rem;
+        background-color: #333;
+        color: #FFF;
+    }
+
+    &__contents {
+        padding: 2rem;
+    }
+
+    &__background-clip {
+        .box {
+            background: url("http://lorempixel.com/400/300/nature/1");
+            background-origin: border-box;
+            width: (40vw/2);
+            height: (30vw/2);
+            border: 1rem solid rgba(0, 0, 0, 0.25);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 0 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            font-size: 130%;
+
+            &--content {
+                background-clip: content-box;
+            }
+
+            &--padding {
+                background-clip: padding-box;
+            }
+
+            &--border {
+                background-clip: border-box;
+            }
+        }
+    }
+
+    &__float-layout {
+        $vertical-margin: 2em;
+        $horizontal-margin: 2%;
+        $content-width: 65%;
+
+        .container {
+            width: 60%;
+            padding: 1em;
+            margin: 0 auto;
+        }
+
+        .id {
+            background: #2db34a;
+            border-radius: 10px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            overflow: hidden;
+            min-height: 4rem;
+        }
+
+        .header,
+        .content,
+        .sidebar {
+            margin-bottom: $vertical-margin;
+        }
+
+        .content {
+            float: left;
+            width: $content-width;
+        }
+
+        .sidebar {
+            float: right;
+            width: 100% - $content-width - $horizontal-margin;
+            margin-left: $horizontal-margin;
+        }
+
+        .footer {
+            clear: both;
+        }
+    }
+
 }
