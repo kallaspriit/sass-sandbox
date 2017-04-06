@@ -10,6 +10,14 @@ $modularscale: (
 );
 */
 
+$color-primary: rgba(21, 21, 21, 1);
+$color-inverted: invert($color-primary);
+$color-secondary: rgba(166, 61, 64, 1);
+$color-tertiary: rgba(233, 184, 114, 1);
+$color-quaternary: rgba(144, 169, 89, 1);
+$color-quinary: rgba(100, 148, 170, 1);
+$color-transparent: rgba(0, 0, 0, 0);
+
 // https://www.paulirish.com/2012/box-sizing-border-box-ftw/
 html {
     box-sizing: border-box;
@@ -24,6 +32,7 @@ html {
 
 body {
     font-family: 'Roboto', sans-serif;
+    color: $color-primary;
 }
 
 // clearfix - https://css-tricks.com/snippets/css/clear-fix/
@@ -34,10 +43,8 @@ body {
 }
 
 // block identifier helper
-.id {
-    background: #2db34a;
-    border-radius: 10px;
-    color: #fff;
+.label {
+    color: $color-secondary;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,6 +55,14 @@ body {
     font-family: monospace;
 }
 
+.id {
+    @extend .label;
+
+    color: $color-inverted;
+    background: linear-gradient(to bottom, $color-quaternary, darken($color-quaternary, 20%));
+    border-radius: 10px;
+}
+
 @mixin grid($size, $color, $width) {
     background-size: $size $size;
     background-image: linear-gradient(to right, $color $width, transparent $width), linear-gradient(to bottom, $color $width, transparent $width);
@@ -56,22 +71,24 @@ body {
 .grid {
     position: relative;
 
-    &:before,
-    &:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-    }
+    &:hover {
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+        }
 
-    &:before {
-        @include grid(5rem, rgba(0, 0, 0, 0.25), 2px);
-    }
+        &:before {
+            @include grid(5rem, rgba(0, 0, 0, 0.1), 2px);
+        }
 
-    &:after {
-        @include grid(1rem, rgba(0, 0, 0, 0.25), 1px);
+        &:after {
+            @include grid(1rem, rgba(0, 0, 0, 0.1), 1px);
+        }
     }
 }
 
@@ -86,8 +103,8 @@ body {
         margin: 0;
         padding: 0 1rem;
         line-height: 4rem;
-        background-color: #333;
-        color: #FFF;
+        background-color: $color-primary;
+        color: $color-inverted;
         font-family: 'Lato', sans-serif;
         font-weight: 100;
         font-size: 2em;
@@ -101,6 +118,7 @@ body {
         .box {
             background: url("http://lorempixel.com/400/300/nature/1");
             background-origin: border-box;
+            background-size: cover;;
             width: (40vw/2);
             height: (30vw/2);
             border: 1rem solid rgba(0, 0, 0, 0.25);
@@ -110,7 +128,7 @@ body {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #FFF;
+            color: $color-inverted;
             font-size: 130%;
 
             &--content {
@@ -158,6 +176,60 @@ body {
                 clear: both;
             }
         }
+    }
+
+    &__gradients {
+
+        .gradient {
+            @extend .label;
+
+            color: $color-inverted;
+            width: 10vw;
+            height: 10vw;
+            margin: 1rem 0rem 1rem 1rem;
+            float: left;
+
+            &__top-to-bottom {
+                background-image: linear-gradient(to bottom, $color-secondary, $color-tertiary);
+            }
+
+            &__angle-smooth {
+                background-image: linear-gradient(45deg, $color-secondary, $color-tertiary);
+            }
+
+            &__angle-hard {
+                background-image: linear-gradient(45deg, $color-secondary 75%, $color-tertiary 75%);
+            }
+
+            &__multicolor-smooth {
+                background-image: linear-gradient(to right, $color-primary, $color-secondary, $color-tertiary, $color-quaternary, $color-quinary);
+            }
+
+            &__multicolor-hard {
+                background-image: linear-gradient(to right, $color-primary 20%, $color-secondary 20%, $color-secondary 40%, $color-tertiary 40%, $color-tertiary 60%, $color-quaternary 60%, $color-quaternary 80%, $color-quinary 80%, $color-quinary 100%);
+            }
+
+            &__radial-smooth {
+                background-image: radial-gradient($color-primary, $color-secondary);
+            }
+
+            &__radial-multicolor {
+                background-image: radial-gradient($color-primary, $color-secondary, $color-tertiary);
+            }
+
+            &__radial-hard {
+                background-image: radial-gradient($color-tertiary 50%, $color-secondary 50%);
+            }
+
+            &__radial-background {
+                background-image: radial-gradient($color-transparent 50%, $color-secondary 50%), url("http://lorempixel.com/400/300/nature/1");
+            }
+
+            &__radial-ellipse {
+                background-image: radial-gradient(ellipse farthest-corner at 0px 0px, $color-secondary 25%, $color-tertiary 75%);
+            }
+        }
+
     }
 
 }
