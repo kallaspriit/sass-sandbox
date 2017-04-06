@@ -10,18 +10,21 @@ $modularscale: (
 );
 */
 
-@mixin grid($size, $color, $width) {
-    background-size: $size $size;
-    background-image: linear-gradient(to right, $color $width, transparent $width), linear-gradient(to bottom, $color $width, transparent $width);
-}
-
 // https://www.paulirish.com/2012/box-sizing-border-box-ftw/
 html {
     box-sizing: border-box;
-    font-size: 1/1.5em;
+    font-size: 1em;
+    line-height: 1.5;
 }
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     box-sizing: inherit;
+}
+
+@mixin grid($size, $color, $width) {
+    background-size: $size $size;
+    background-image: linear-gradient(to right, $color $width, transparent $width), linear-gradient(to bottom, $color $width, transparent $width);
 }
 
 .grid {
@@ -54,7 +57,7 @@ html {
 
     &__title {
         margin: 0;
-        padding: 0 1em;
+        padding: 0 1rem;
         line-height: 4rem;
         background-color: #333;
         color: #FFF;
