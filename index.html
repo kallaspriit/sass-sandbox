@@ -7,14 +7,6 @@
     </head>
 
     <body>
-        <section class="experiment experiment__background-clip">
-            <h2 class="experiment__title">Background clip</h2>
-            <div class="experiment__contents">
-                <div class="box box--content">background-clip: content-box;</div>
-                <div class="box box--padding">background-clip: padding-box;</div>
-                <div class="box box--border">background-clip: border-box;</div>
-            </div>
-        </section>
 
         <section class="experiment experiment__float-layout">
             <h2 class="experiment__title">Flexible float-based layout</h2>
@@ -52,6 +44,60 @@
                 <div class="gradient gradient__radial-hard">A 50% B 50%</div>
                 <div class="gradient gradient__radial-background">A 50% B 50%</div>
                 <div class="gradient gradient__radial-ellipse">ellipse farthest-corner at 0px 0px, A 25%, B 75%</div>
+            </div>
+        </section>
+
+        <section class="experiment experiment__backgrounds">
+            <h2 class="experiment__title">Backgrounds</h2>
+            <div class="group">
+                <div class="background background__default">
+                    default
+                </div>
+                <div class="background background__no-repeat">
+                    background-repeat: no-repeat;
+                </div>
+                <div class="background background__repeat-x">
+                    background-repeat: repeat-x;
+                </div>
+                <div class="background background__repeat-y">
+                    background-repeat: repeat-y;
+                </div>
+                <div class="background background__position-px">
+                    background-repeat: no-repeat;<br/>
+                    background-position: 1em 2em;
+                </div>
+                <div class="background background__cover">
+                    background-repeat: no-repeat;<br/>
+                    background-size: cover;
+                </div>
+                <div class="background background__contain">
+                    background-repeat: no-repeat;<br/>
+                    background-size: contain;
+                </div>
+                <div class="background background__clip-border">
+                    background-repeat: no-repeat;<br/>
+                    background-clip: border-box;
+                </div>
+                <div class="background background__clip-border-origin">
+                    background-repeat: no-repeat;<br/>
+                    background-clip: border-box;<br/>
+                    background-origin: border-box;
+                </div>
+                <div class="background background__clip-padding">
+                    background-repeat: no-repeat;<br/>
+                    background-clip: padding-box;
+                </div>
+                <div class="background background__clip-content">
+                    background-repeat: no-repeat;<br/>
+                    background-clip: content-box;
+                </div>
+                <div class="background background__multiple">
+                    background:<br/>
+                        url(A) 0 0 no-repeat border-box,<br/>
+                        url(B) 100% 0 no-repeat  border-box,<br/>
+                        url(C) 0 100% no-repeat  border-box,<br/>
+                        url(D) 100% 100% no-repeat  border-box;
+                </div>
             </div>
         </section>
     </body>
