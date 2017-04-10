@@ -123,7 +123,7 @@ body {
         color: $color-inverted;
         font-family: 'Lato', sans-serif;
         font-weight: 100;
-        font-size: 2em;
+        font-size: 3rem;
     }
 
     &__contents {
@@ -131,14 +131,12 @@ body {
     }
 
     &__float-layout {
-        $vertical-margin: 2em;
+        $vertical-margin: 2rem;
         $horizontal-margin: 2%;
         $content-width: 65%;
 
         .layout {
-            width: 60%;
-            padding: 1em;
-            margin: 0 auto;
+            padding: $vertical-margin;
 
             &__header,
             &__content,
@@ -449,7 +447,38 @@ body {
             //     flex-grow: 1;
             // }
         }
+    }
 
+    &__flexbox-layout {
+        $margin: 2rem;
+
+        .layout {
+            // use flex layout in row direction and wrap items
+            display: flex;
+            flex-flow: row wrap;
+
+            // add half-margin padding, the rest comes from the elements themselves
+            padding: $margin / 2;
+
+            // target immediate children - the flex items
+            > * {
+                padding: $margin / 2;
+            }
+
+            // make the header and footer use up the entire width
+            &__header,
+            &__footer {
+                flex-basis: 100%;
+            }
+
+            // make the content 4 times bigger than the sidebar
+            &__content {
+                flex: 4;
+            }
+            &__sidebar {
+                flex: 1;
+            }
+        }
     }
 
 }
