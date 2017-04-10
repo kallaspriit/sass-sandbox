@@ -18,6 +18,17 @@ $color-quaternary: rgba(144, 169, 89, 1);
 $color-quinary: rgba(100, 148, 170, 1);
 $color-transparent: rgba(0, 0, 0, 0);
 
+$color1: #1ABC9C;
+$color2: #3498DB;
+$color3: #9B59B6;
+$color4: #34495E;
+$color5: #F1C40F;
+$color6: #E67E22;
+$color7: #E74C3C;
+$color8: #BDC3C7;
+$color9: #2ECC71;
+$color10: #16A085;
+
 // https://www.paulirish.com/2012/box-sizing-border-box-ftw/
 html {
     box-sizing: border-box;
@@ -50,7 +61,7 @@ body {
     justify-content: center;
     padding: 1rem;
     overflow: hidden;
-    min-height: 4rem;
+    min-height: 5rem;
     font-size: 130%;
     font-family: monospace;
 }
@@ -94,15 +105,20 @@ body {
 
 .experiment {
     position: relative;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
     background-color: rgba(0, 0, 0, 0.2);
+
+    // remove bottom margin from the last experiment
+    &:last-of-type {
+        margin-bottom: 0;
+    }
 
     @extend .grid;
 
     &__title {
         margin: 0;
         padding: 0 1rem;
-        line-height: 4rem;
+        line-height: 5rem;
         background-color: $color-primary;
         color: $color-inverted;
         font-family: 'Lato', sans-serif;
@@ -284,6 +300,156 @@ body {
                     url("http://lorempixel.com/200/150/nature/4") 100% 100% no-repeat  border-box;
             }
         }
+    }
+
+    &__flexbox {
+
+        .container {
+            // visual
+            background-color: $color-secondary;
+            min-height: 100vh;
+
+            // flex - block, insline-flex - inline
+            display: flex;
+            // display: inline-flex;
+
+            // main axis direction
+            // flex-direction: row; // default left to right, cross axis is from top to bottom
+            // flex-direction: row-reverse;
+            // flex-direction: column;
+            // flex-direction: column-reverse;
+
+            // how to wrap items that do not fit on the main axis
+            // flex-wrap: nowrap; // default
+            // flex-wrap: wrap;
+            // flex-wrap: wrap-reverse;
+
+            // align on main axis
+            // justify-content: flex-start; // default, start of flex container
+            // justify-content: flex-end; // end of flex container
+            // justify-content: center; // center of flex container
+            // justify-content: space-between; // divide free space between items
+            // justify-content: space-around; // divide free space between items, include start and end
+
+            // align on cross axis
+            // align-items: stretch; // default, stretches to use available space on cross axis
+            // align-items: center; // centered on cross axis
+            // align-items: flex-start; // start of cross axis
+            // align-items: flex-end; // end of cross axis
+            // align-items: baseline; // keep baseline of text aligned
+
+            // what to do with extra space on the cross axis
+            // flex-wrap: wrap;
+            // align-content: stretch; // default, divide the available space between all items
+            // align-content: flex-start; // start at start of cross axis
+            // align-content: flex-end; // start at end of cross axis
+            // align-content: center; // start at end of cross axis
+            // align-content: space-between; // divide free space between items
+            // align-content: space-around; // divide free space between items, include start and end
+
+            // responsive navigation test
+            // display: flex;
+            // min-height: inherit;
+            // min-height: 5rem;
+            // .item {
+            //     flex: 1;
+            //
+            //     // make the last 4 smaller
+            //     &:nth-child(n+7) {
+            //         flex-grow: 0.5;
+            //     }
+            // }
+            // @media all and (max-width: 1000px) {
+            //     flex-wrap: wrap;
+            //
+            //     .item {
+            //         flex-basis: 50%;
+            //
+            //         &:nth-child(n+7) {
+            //             flex-basis: 25%;
+            //         }
+            //     }
+            // }
+            // @media all and (max-width: 500px) {
+            //     flex-wrap: wrap;
+            //
+            //     .item {
+            //         flex-basis: 100%;
+            //     }
+            // }
+        }
+
+        .item {
+            @extend .label;
+
+            color: $color-inverted;
+
+            &__1 { background-color: $color1; }
+            &__2 { background-color: $color2; }
+            &__3 { background-color: $color3; }
+            &__4 { background-color: $color4; }
+            &__5 { background-color: $color5; }
+            &__6 { background-color: $color6; }
+            &__7 { background-color: $color7; }
+            &__8 { background-color: $color8; }
+            &__9 { background-color: $color9; }
+            &__10 { background-color: $color10; }
+
+            // three items per row
+            // width: 33.33%;
+
+            // three items per row with margin
+            // width: calc(33.33% - 4em);
+            // margin: 2em;
+
+            // what to do with extra or missing space (grow, shrink)
+            // flex: 1;
+
+            // reorder items (negative works as well)
+            // &__2 { order: 2; }
+            // &__3 { order: 3; }
+
+            // testing align-content
+            // width: 25%;
+
+            // test varying heights
+            // &__2 { padding-bottom: 3em; }
+            // &__5 { padding-bottom: 5em; }
+            // &__9 { padding-bottom: 2em; }
+
+            // test changing align of specific items
+            // &__3 {
+            //     align-self: stretch;
+            // }
+
+            // test controlling grow/shrink of items
+            // flex: 1; // flex-grow: 1; flex-shrink: 1; flex-basis:
+            // flex-grow: 1; // defaults to 0 - dont use the extra space
+            // flex-shrink: 1;
+
+            // try to give second box more space
+            // &__2 {
+            //     flex: 2;
+            // }
+
+            // provide ideal size in main axis for all and a specific item
+            // flex-basis: 5rem;
+            // flex: 0 1 5rem;
+            // &__2 {
+            //     // flex-basis: 10rem;
+            //     flex: 0 1 10rem;
+            // }
+            // &__10 {
+            //     flex-grow: 1;
+            // }
+
+            // make the normal item size 5rem and give all the extra room to the last item
+            // flex: 0 1 5rem;
+            // &:last-of-type {
+            //     flex-grow: 1;
+            // }
+        }
+
     }
 
 }
