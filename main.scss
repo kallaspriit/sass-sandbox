@@ -306,7 +306,7 @@ body {
         }
     }
 
-    &__flexbox {
+    &__flexbox-playground {
 
         .container {
             // visual
@@ -491,7 +491,7 @@ body {
 
     &__responsive {
 
-        .responsive {
+        .responsive-wrapper {
             @extend .label;
 
             height: 100vh;
@@ -534,6 +534,35 @@ body {
                 }
             }
         }
+    }
+
+    &__animations {
+
+        // flex container
+        .animation {
+            display: flex;
+            flex-flow: row wrap;
+            text-align: center;
+
+            // flex items
+            > * {
+                // make the items flex container as well to center text both horizontally and vertically
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                // make the items grow and occupy 25% of the room if possible
+                flex: 1 1 25%;
+
+                // make the items square (padding percentage is relative to width)
+                &:before {
+                    content: "";
+                    float: left;
+                    padding-bottom: 100%;
+                }
+            }
+        }
+
     }
 
 }
