@@ -1,4 +1,5 @@
-@import "~normalize-scss/sass/normalize/import-now";
+@import "~normalize-scss/sass/normalize/import-now"; // https://github.com/JohnAlbin/normalize-scss
+@import "~include-media/dist/_include-media"; // http://include-media.com/
 
 /*
 // https://github.com/modularscale/modularscale-sass
@@ -10,23 +11,28 @@ $modularscale: (
 );
 */
 
-$color-primary: rgba(21, 21, 21, 1);
-$color-inverted: invert($color-primary);
-$color-secondary: rgba(166, 61, 64, 1);
-$color-tertiary: rgba(233, 184, 114, 1);
-$color-quaternary: rgba(144, 169, 89, 1);
-$color-quinary: rgba(100, 148, 170, 1);
+// define include-media breakpoints
+$breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px);
+
+// content colors
+$color-primary:     rgba(21, 21, 21, 1);
+$color-inverted:    invert($color-primary);
+$color-secondary:   rgba(166, 61, 64, 1);
+$color-tertiary:    rgba(233, 184, 114, 1);
+$color-quaternary:  rgba(144, 169, 89, 1);
+$color-quinary:     rgba(100, 148, 170, 1);
 $color-transparent: rgba(0, 0, 0, 0);
 
-$color1: #1ABC9C;
-$color2: #3498DB;
-$color3: #9B59B6;
-$color4: #34495E;
-$color5: #F1C40F;
-$color6: #E67E22;
-$color7: #E74C3C;
-$color8: #BDC3C7;
-$color9: #2ECC71;
+// testing colors
+$color1:  #1ABC9C;
+$color2:  #3498DB;
+$color3:  #9B59B6;
+$color4:  #34495E;
+$color5:  #F1C40F;
+$color6:  #E67E22;
+$color7:  #E74C3C;
+$color8:  #BDC3C7;
+$color9:  #2ECC71;
 $color10: #16A085;
 
 // https://www.paulirish.com/2012/box-sizing-border-box-ftw/
@@ -401,7 +407,7 @@ body {
             // margin: 2em;
 
             // what to do with extra or missing space (grow, shrink)
-            // flex: 1;
+            flex: 1;
 
             // reorder items (negative works as well)
             // &__2 { order: 2; }
@@ -451,6 +457,7 @@ body {
 
     &__flexbox-layout {
         $margin: 2rem;
+        $sidebar-width: 20rem;
 
         .layout {
             // use flex layout in row direction and wrap items
@@ -476,7 +483,55 @@ body {
                 flex: 4;
             }
             &__sidebar {
-                flex: 1;
+                flex: 1; // just set the ratio
+                // flex: 1 4 ($sidebar-width + $margin); // use preferred width
+            }
+        }
+    }
+
+    &__responsive {
+
+        .responsive {
+            @extend .label;
+
+            height: 100vh;
+            color: $color-inverted;
+            background: linear-gradient(to bottom, $color1, darken($color1, 20%));
+
+            &:after {
+                content: "desktop";
+            }
+
+            @include media(">=tablet", "<desktop", "portrait") {
+                background: linear-gradient(to bottom, $color2, darken($color2, 20%));
+
+                &:after {
+                    content: "tablet portrait";
+                }
+            }
+
+            @include media(">=tablet", "<desktop", "landscape") {
+                background: linear-gradient(to bottom, $color3, darken($color3, 20%));
+
+                &:after {
+                    content: "tablet landscape";
+                }
+            }
+
+            @include media(">=phone", "<tablet", "portrait") {
+                background: linear-gradient(to bottom, $color4, darken($color4, 20%));
+
+                &:after {
+                    content: "phone portrait";
+                }
+            }
+
+            @include media("<tablet", "landscape") {
+                background: linear-gradient(to bottom, $color5, darken($color5, 20%));
+
+                &:after {
+                    content: "phone landscape";
+                }
             }
         }
     }
