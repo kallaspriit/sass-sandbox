@@ -1,5 +1,5 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { HotModuleReplacementPlugin, NamedModulesPlugin } from 'webpack';
+import { NamedModulesPlugin } from 'webpack';
 import glob from 'glob';
 import path from 'path';
 
@@ -7,8 +7,6 @@ const resolvePath = relativePath => path.resolve(__dirname, relativePath);
 const includePaths = [
     resolvePath('.', 'gfx')
 ];
-
-console.log('includePaths', includePaths);
 
 const config = {
 
@@ -18,8 +16,6 @@ const config = {
     // application entry filename
     entry: {
         app: [
-            'webpack/hot/dev-server',
-            'webpack-dev-server/client?http://localhost:3000',
             './index'
         ]
     },
@@ -92,9 +88,6 @@ const config = {
 
     // configure plugins
     plugins: [
-        // enable hot-reloading
-        new HotModuleReplacementPlugin(),
-
         new NamedModulesPlugin(),
     ],
 
