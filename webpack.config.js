@@ -76,11 +76,11 @@ const config = {
                 test: /\.scss$/,
                 include: includePaths,
                 use: [{
-                    loader: 'style-loader' // creates style nodes from JS strings
+                    loader: 'style-loader'
                 }, {
-                    loader: 'css-loader' // translates CSS into CommonJS
+                    loader: 'css-loader'
                 }, {
-                    loader: 'sass-loader' // compiles Sass to CSS
+                    loader: 'sass-loader'
                 }]
             }
         ]
