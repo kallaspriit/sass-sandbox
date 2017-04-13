@@ -3,6 +3,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import colors from 'colors';
 import webpackConfig from '../webpack.config';
 
+// dev server configuration
 const serverConfig = {
     hot: true,
 	overlay: {
@@ -42,12 +43,14 @@ const devServer = new WebpackDevServer(compiler, serverConfig);
 // configure compiler
 let compileStartTime = Date.now();
 
+// called when the compiler starts compiling
 compiler.plugin('compile', (params) => {
 	compileStartTime = Date.now();
 
 	// process.stdout.write('compiling.. ');
 });
 
+// called when compiler finishes update
 compiler.plugin('done', (stats) => {
 	const compileTimeTaken = Date.now() - compileStartTime;
 	const info = stats.toJson()
@@ -62,7 +65,7 @@ compiler.plugin('done', (stats) => {
 			console.error(lines.splice(1).map(line => '> ' + line).join('\n'));
 			console.log('');
 		});
-	}if (stats.hasWarnings()) {
+	} else if (stats.hasWarnings()) {
 		console.log('GOT WARNINGS'.yellow + ` in ${compileTimeTaken}ms`);
 
 		info.warnings.forEach(message => {
@@ -77,6 +80,7 @@ compiler.plugin('done', (stats) => {
 	}
 });
 
+// called when compiling fails hard
 compiler.plugin('failed', (error) => {
 	console.error('FAILED'.red + ` (${error})`);
 });
